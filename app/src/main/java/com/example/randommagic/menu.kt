@@ -24,13 +24,13 @@ private lateinit var binding: ActivityMenuBinding
     private fun configurarBotones() {
 
         binding.chat.setOnClickListener {
-            val intent = Intent(this, chat::class.java)
+            val intent = Intent(this, ChatActivity::class.java)
             startActivity(intent)
         }
 
         binding.perfil.setOnClickListener {
             // Crea un "Intent" para ir desde esta MainActivity hacia productos (el nombre de tu clase).
-            val intent = Intent(this, registrarUsuario::class.java)
+            val intent = Intent(this, perfil::class.java)
 
             // Inicia la nueva actividad.
             startActivity(intent)

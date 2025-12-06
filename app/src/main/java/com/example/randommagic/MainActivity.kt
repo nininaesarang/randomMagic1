@@ -2,38 +2,103 @@ package com.example.randommagic // Asegúrate de que el paquete sea el correcto
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.randommagic.ChatActivity
 import com.example.randommagic.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 
-class MainActivity : AppCompatActivity() {// Declara la variable para ViewBinding. 'lateinit' significa que la inicializaremos más tarde.
-private lateinit var binding: ActivityMainBinding
+class LoginActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // 1. "Inflar" el layout XML y prepararlo para su uso con ViewBinding.
         binding = ActivityMainBinding.inflate(layoutInflater)
-
-        // 2. Establecer el layout inflado como la vista de esta actividad.
         setContentView(binding.root)
 
-        // 3. Configurar los listeners para los botones.
-        configurarListenersDeBotones()
-    }
+        // Inicializar Firebase Auth
+        auth = FirebaseAuth.getInstance()
 
-    private fun configurarListenersDeBotones() {
+        // 1. Verificar si el usuario ya está logueado
+        if (auth.currentUser != null) {
+            // Si ya hay sesión, saltar directamente al Chat
+            goToChat()
+        }
 
+        // 2. Configurar listeners de botones
         binding.login.setOnClickListener {
-            val intent = Intent(this, menu::class.java)
-            startActivity(intent)
+            loginUser()
         }
 
         binding.registrar.setOnClickListener {
-            // Crea un "Intent" para ir desde esta MainActivity hacia productos (el nombre de tu clase).
-            val intent = Intent(this, registrarUsuario::class.java)
-
-            // Inicia la nueva actividad.
-            startActivity(intent)
+            registerUser()
         }
+    }
+
+    private fun registerUser() {
+        val email = binding.correo.text.toString().trim()
+        val password = binding.contra.text.toString().trim()
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Debe ingresar email y contraseña.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Registro exitoso. ¡Bienvenido!", Toast.LENGTH_SHORT).show()
+                    goToChat()
+                } else {
+                    handleAuthError(task.exception)
+                }
+            }
+    }
+
+    private fun loginUser() {
+        val email = binding.correo.text.toString().trim()
+        val password = binding.contra.text.toString().trim()
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Debe ingresar email y contraseña.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Inicio de sesión exitoso.", Toast.LENGTH_SHORT).show()
+                    goToChat()
+                } else {
+                    handleAuthError(task.exception)
+                }
+            }
+    }
+
+    /**
+     * Maneja las excepciones comunes de Firebase Authentication.
+     */
+    private fun handleAuthError(e: Exception?) {
+        val message = when (e) {
+            is FirebaseAuthWeakPasswordException -> "Contraseña débil. Debe tener al menos 6 caracteres."
+            is FirebaseAuthInvalidCredentialsException -> "Credenciales inválidas. Revise el email y la contraseña."
+            is FirebaseAuthUserCollisionException -> "El email ya está registrado."
+            else -> "Error de autenticación: ${e?.message}"
+        }
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    /**
+     * Inicia la ChatActivity y cierra la LoginActivity.
+     */
+    private fun goToChat() {
+        val intent = Intent(this, ChatActivity::class.java)
+        startActivity(intent)
+        finish() // Evita que el usuario regrese a la pantalla de login con el botón 'atrás'
     }
 }
