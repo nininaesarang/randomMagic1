@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "664956626588",
+    "project_id": "random-magic",
+    "storage_bucket": "random-magic.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664956626588:android:519fdb38d320314b3b6f59",
+        "android_client_info": {
+          "package_name": "com.example.randommagic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVcpthgat69vc_PJAL3dDBVzwsYqNqM1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
