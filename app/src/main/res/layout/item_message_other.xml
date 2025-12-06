@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="8dp"
+    android:paddingTop="4dp"
+    android:paddingEnd="60dp"
+    android:paddingBottom="4dp">
+
+    <!-- Contenedor principal: usa layout_gravity="start" para alinear a la izquierda (CLAVE) -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        app:cardBackgroundColor="#E0E0E0"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Email del Remitente -->
+            <TextView
+                android:id="@+id/tvSender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/design_default_color_primary"
+                android:textSize="12sp"
+                android:layout_gravity="start"
+                tools:text="otro@usuario.com" />
+
+            <!-- Texto del Mensaje -->
+            <TextView
+                android:id="@+id/tvMessageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="250dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                tools:text="Hola a todos, este es un mensaje de otro usuario." />
+
+            <!-- Hora del Mensaje -->
+            <TextView
+                android:id="@+id/tvTimestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#666666"
+                android:layout_gravity="end"
+                android:layout_marginTop="2dp"
+                tools:text="10:31 PM" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

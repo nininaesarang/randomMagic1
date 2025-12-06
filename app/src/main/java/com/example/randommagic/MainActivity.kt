@@ -23,21 +23,14 @@ private lateinit var binding: ActivityMainBinding
 
     private fun configurarListenersDeBotones() {
 
-        // --- Botón de Iniciar Sesión (login) ---
-        // Vamos a hacer que este botón nos lleve a la pantalla de PERFIL.
         binding.login.setOnClickListener {
-            // Crea un "Intent" para ir desde esta MainActivity hacia PerfilActivity.
-            val intent = Intent(this, perfil::class.java)
-
-            // Inicia la nueva actividad.
+            val intent = Intent(this, menu::class.java)
             startActivity(intent)
         }
 
-        // --- Botón de Registrar Cuenta (registrar) ---
-        // Vamos a hacer que este botón nos lleve a la pantalla de PRODUCTOS.
         binding.registrar.setOnClickListener {
             // Crea un "Intent" para ir desde esta MainActivity hacia productos (el nombre de tu clase).
-            val intent = Intent(this, productos::class.java)
+            val intent = Intent(this, registrarUsuario::class.java)
 
             // Inicia la nueva actividad.
             startActivity(intent)

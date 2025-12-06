@@ -1,20 +1,44 @@
 package com.example.randommagic
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.randommagic.databinding.ActivityMenuBinding
 
-class menu : AppCompatActivity() {
+class menu : AppCompatActivity() {// Declara la variable para ViewBinding. 'lateinit' significa que la inicializaremos más tarde.
+private lateinit var binding: ActivityMenuBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_menu)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        // 1. "Inflar" el layout XML y prepararlo para su uso con ViewBinding.
+        binding = ActivityMenuBinding.inflate(layoutInflater)
+
+        // 2. Establecer el layout inflado como la vista de esta actividad.
+        setContentView(binding.root)
+
+        // 3. Configurar los listeners para los botones.
+        configurarBotones()
+    }
+
+    private fun configurarBotones() {
+
+        binding.chat.setOnClickListener {
+            val intent = Intent(this, chat::class.java)
+            startActivity(intent)
+        }
+
+        binding.perfil.setOnClickListener {
+            // Crea un "Intent" para ir desde esta MainActivity hacia productos (el nombre de tu clase).
+            val intent = Intent(this, registrarUsuario::class.java)
+
+            // Inicia la nueva actividad.
+            startActivity(intent)
+        }
+
+        binding.productos.setOnClickListener {
+            val intent = Intent(this, productos::class.java)
+            startActivity(intent)
         }
     }
 }
