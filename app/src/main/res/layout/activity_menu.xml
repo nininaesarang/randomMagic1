@@ -51,4 +51,15 @@
         android:textSize="30sp"
         />
 
+    <Button
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/logout"
+        android:text="Cerrar sesión"
+        app:layout_constraintTop_toBottomOf="@+id/productos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="30sp"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

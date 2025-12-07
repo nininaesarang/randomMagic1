@@ -4,35 +4,34 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.randommagic.databinding.ActivityMenuBinding
+import com.google.firebase.auth.FirebaseAuth
 
-class menu : AppCompatActivity() {// Declara la variable para ViewBinding. 'lateinit' significa que la inicializaremos más tarde.
-private lateinit var binding: ActivityMenuBinding
+class menu : AppCompatActivity() {
+    private lateinit var binding: ActivityMenuBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // 1. "Inflar" el layout XML y prepararlo para su uso con ViewBinding.
         binding = ActivityMenuBinding.inflate(layoutInflater)
-
-        // 2. Establecer el layout inflado como la vista de esta actividad.
         setContentView(binding.root)
 
-        // 3. Configurar los listeners para los botones.
+        // ¡IMPORTANTE! Inicializar la instancia de Firebase Auth.
+        auth = FirebaseAuth.getInstance()
+
+        // Llamar a las funciones de configuración.
         configurarBotones()
+        mostrarBienvenida() // Para que el mensaje aparezca.
     }
 
     private fun configurarBotones() {
-
         binding.chat.setOnClickListener {
             val intent = Intent(this, ChatActivity::class.java)
             startActivity(intent)
         }
 
         binding.perfil.setOnClickListener {
-            // Crea un "Intent" para ir desde esta MainActivity hacia productos (el nombre de tu clase).
+            // Tu clase se llama 'perfil', no PerfilActivity
             val intent = Intent(this, perfil::class.java)
-
-            // Inicia la nueva actividad.
             startActivity(intent)
         }
 
@@ -40,5 +39,25 @@ private lateinit var binding: ActivityMenuBinding
             val intent = Intent(this, productos::class.java)
             startActivity(intent)
         }
+
+        binding.logout.setOnClickListener {
+            cerrarSesion()
+        }
+    }
+
+    private fun mostrarBienvenida() {
+        val user = auth.currentUser
+        binding.bienvenida.text = "Bienvenido, ${user?.email ?: "Invitado"}"
+    }
+
+    private fun cerrarSesion() {
+        auth.signOut()
+
+        // La corrección clave: apuntar a MainActivity.
+        val intent = Intent(this, MainActivity::class.java)
+
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 }

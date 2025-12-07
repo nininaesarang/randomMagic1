@@ -19,35 +19,36 @@ class ChatActivity : AppCompatActivity() {
 
     private val chatCollection = db.collection("chat_messages")
 
-    // 3. Lista mutable para almacenar los mensajes y el adaptador
     private val messageList = mutableListOf<ChatMessage>()
     private lateinit var chatAdapter: ChatAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Inicializar View Binding (asume que tu layout se llama activity_chat.xml)
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 4. Verificar si el usuario está autenticado
+        supportActionBar?.apply {
+            title = "Chat Grupal" // Opcional: Pone un título a la pantalla.
+            setDisplayHomeAsUpEnabled(true)
+        }
+
         if (auth.currentUser == null) {
-            // Redirigir o mostrar un error si no hay usuario logueado
             Toast.makeText(this, "Debe iniciar sesión para usar el chat.", Toast.LENGTH_LONG).show()
             finish()
             return
         }
-
-        // 5. Configurar RecyclerView
         setupRecyclerView()
-
-        // 6. Configurar el botón de enviar
         binding.btnSend.setOnClickListener {
             sendMessage()
         }
-
-        // 7. Empezar a escuchar mensajes de Firestore
         listenForMessages()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        // Simula la acción del botón "atrás" del sistema, lo que te
+        // llevará a la actividad anterior (MenuActivity).
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 
     private fun setupRecyclerView() {

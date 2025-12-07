@@ -1,61 +1,75 @@
 package com.example.randommagic
+
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.randommagic.ChatMessage
-import com.example.randommagic.R
+import com.example.randommagic.databinding.ItemMessageMeBinding
+import com.example.randommagic.databinding.ItemMessageOtherBinding
 import com.google.firebase.auth.FirebaseAuth
-import java.text.SimpleDateFormat
-import java.util.Locale
 
-class ChatAdapter(private val messages: List<ChatMessage>) :
-    RecyclerView.Adapter<ChatAdapter.MessageViewHolder>() {
+class ChatAdapter(private val messages: List<ChatMessage>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val currentEmail = FirebaseAuth.getInstance().currentUser?.email
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val currentUserEmail = auth.currentUser?.email
 
-    companion object {
-        private const val VIEW_TYPE_ME = 1
-        private const val VIEW_TYPE_OTHER = 2
+    private companion object {
+        const val VIEW_TYPE_SENT = 1
+        const val VIEW_TYPE_RECEIVED = 2
     }
 
-    class MessageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvMessageText: TextView = view.findViewById(R.id.tvMessageText)
-        val tvSender: TextView = view.findViewById(R.id.tvSender)
-        val tvTimestamp: TextView = view.findViewById(R.id.tvTimestamp)
-
-        private val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-
-        fun bind(message: ChatMessage) {
-            tvMessageText.text = message.text
-            val senderDisplay = message.userEmail.split("@").first()
-            tvSender.text = senderDisplay
-            tvTimestamp.text = timeFormat.format(message.timestamp.toDate())
-        }
-    }
+    // --- ViewHolders: uno para cada tipo de mensaje ---
+    inner class SentMessageViewHolder(val binding: ItemMessageMeBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ReceivedMessageViewHolder(val binding: ItemMessageOtherBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun getItemViewType(position: Int): Int {
-        return if (messages[position].userEmail == currentEmail) {
-            VIEW_TYPE_ME
+        val message = messages[position]
+        // Si el email del mensaje es igual al del usuario actual, es un mensaje ENVIADO.
+        return if (message.userEmail == currentUserEmail) {
+            VIEW_TYPE_SENT
         } else {
-            VIEW_TYPE_OTHER
+            // Si no, es un mensaje RECIBIDO.
+            VIEW_TYPE_RECEIVED
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
-        val layoutId = when (viewType) {
-            VIEW_TYPE_ME -> R.layout.item_message_me
-            VIEW_TYPE_OTHER -> R.layout.item_message_other
-            else -> throw IllegalArgumentException("Tipo de vista desconocido")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == VIEW_TYPE_SENT) {
+            val binding = ItemMessageMeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            SentMessageViewHolder(binding)
+        } else {
+            val binding = ItemMessageOtherBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ReceivedMessageViewHolder(binding)
         }
-        val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
-        return MessageViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-        holder.bind(messages[position])
     }
 
     override fun getItemCount(): Int = messages.size
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val message = messages[position]
+
+        val formattedTime = formatTimestamp(message.timestamp)
+
+        when (holder) {
+            is SentMessageViewHolder -> {
+                holder.binding.tvEmail.text = message.userEmail
+                holder.binding.tvMessageSent.text = message.text
+                holder.binding.tvTimestampSent.text = formattedTime
+            }
+            is ReceivedMessageViewHolder -> {
+                // Asigna el texto del mensaje y el email del remitente.
+                holder.binding.tvMessageText.text = message.text
+                holder.binding.tvSender.text = message.userEmail
+                holder.binding.tvTimestamp.text = formattedTime
+            }
+        }
+    }
+    private fun formatTimestamp(timestamp: com.google.firebase.Timestamp): String {
+        return try {
+            // Formato: "10:45 AM"
+            val sdf = java.text.SimpleDateFormat("h:mm a", java.util.Locale.getDefault())
+            sdf.format(timestamp.toDate())
+        } catch (e: Exception) {
+            "" // Devuelve vacío si hay error
+        }
+    }
 }

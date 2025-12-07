@@ -27,7 +27,7 @@
 
             <!-- Email del Remitente (Solo para referencia, lo ponemos pequeño y a la derecha) -->
             <TextView
-                android:id="@+id/tvSender"
+                android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -38,7 +38,7 @@
 
             <!-- Texto del Mensaje -->
             <TextView
-                android:id="@+id/tvMessageText"
+                android:id="@+id/tvMessageSent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxWidth="250dp"
@@ -48,7 +48,7 @@
 
             <!-- Hora del Mensaje -->
             <TextView
-                android:id="@+id/tvTimestamp"
+                android:id="@+id/tvTimestampSent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
