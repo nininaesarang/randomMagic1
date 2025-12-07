@@ -49,16 +49,13 @@
         <ImageButton
             android:id="@+id/btnSend"
             android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_send"
-            android:contentDescription="Enviar mensaje"
+            android:layout_height="42dp"
             android:background="@drawable/rounded_button"
-            android:tint="@android:color/white"
-            android:scaleType="fitCenter" />
+            android:contentDescription="Enviar mensaje"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_send"
+            app:tint="@android:color/white" />
 
     </LinearLayout>
-
-    <!-- Necesitamos un fondo personalizado para el EditText y el botón. -->
-    <!-- Creamos placeholders para los drawables necesarios -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

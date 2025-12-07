@@ -17,17 +17,14 @@ class ChatAdapter(private val messages: List<ChatMessage>) : RecyclerView.Adapte
         const val VIEW_TYPE_RECEIVED = 2
     }
 
-    // --- ViewHolders: uno para cada tipo de mensaje ---
     inner class SentMessageViewHolder(val binding: ItemMessageMeBinding) : RecyclerView.ViewHolder(binding.root)
     inner class ReceivedMessageViewHolder(val binding: ItemMessageOtherBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun getItemViewType(position: Int): Int {
         val message = messages[position]
-        // Si el email del mensaje es igual al del usuario actual, es un mensaje ENVIADO.
         return if (message.userEmail == currentUserEmail) {
             VIEW_TYPE_SENT
         } else {
-            // Si no, es un mensaje RECIBIDO.
             VIEW_TYPE_RECEIVED
         }
     }
@@ -65,11 +62,10 @@ class ChatAdapter(private val messages: List<ChatMessage>) : RecyclerView.Adapte
     }
     private fun formatTimestamp(timestamp: com.google.firebase.Timestamp): String {
         return try {
-            // Formato: "10:45 AM"
             val sdf = java.text.SimpleDateFormat("h:mm a", java.util.Locale.getDefault())
             sdf.format(timestamp.toDate())
         } catch (e: Exception) {
-            "" // Devuelve vacío si hay error
+            ""
         }
     }
 }

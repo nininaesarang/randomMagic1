@@ -45,20 +45,14 @@ class ChatActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        // Simula la acción del botón "atrás" del sistema, lo que te
-        // llevará a la actividad anterior (MenuActivity).
         onBackPressedDispatcher.onBackPressed()
         return true
     }
 
     private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(this)
-
-        // Hace que la lista se desplace al final automáticamente (stackFromEnd = true)
         layoutManager.stackFromEnd = true
-
         binding.recyclerViewChat.layoutManager = layoutManager
-
         chatAdapter = ChatAdapter(messageList)
         binding.recyclerViewChat.adapter = chatAdapter
     }
@@ -66,24 +60,17 @@ class ChatActivity : AppCompatActivity() {
     private fun sendMessage() {
         val messageText = binding.etMessage.text.toString().trim()
         val userEmail = auth.currentUser?.email // Email del remitente
-
-        // Validaciones
         if (messageText.isEmpty() || userEmail == null) {
             Toast.makeText(this, "No puedes enviar un mensaje vacío.", Toast.LENGTH_SHORT).show()
             return
         }
-
-        // 1. Crear el objeto ChatMessage
         val chatMessage = ChatMessage(
             text = messageText,
             userEmail = userEmail,
-            timestamp = Timestamp.now() // Hora del servidor para la marca de tiempo
+            timestamp = Timestamp.now()
         )
-
-        // 2. Subir el mensaje a la colección "chat_messages"
         chatCollection.add(chatMessage)
             .addOnSuccessListener {
-                // Limpiar campo de texto
                 binding.etMessage.setText("")
                 // Desplazarse al final
                 binding.recyclerViewChat.scrollToPosition(messageList.size - 1)
@@ -94,7 +81,6 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun listenForMessages() {
-        // Ordena los mensajes por la marca de tiempo (timestamp) de forma ascendente
         chatCollection.orderBy("timestamp", Query.Direction.ASCENDING)
             .addSnapshotListener { snapshots, e ->
 
@@ -102,24 +88,15 @@ class ChatActivity : AppCompatActivity() {
                     Toast.makeText(this, "Error al cargar mensajes: ${e.message}", Toast.LENGTH_LONG).show()
                     return@addSnapshotListener
                 }
-
                 if (snapshots != null) {
-                    // Limpia la lista actual para recargar los datos
                     messageList.clear()
-
-                    // Llena la lista con los documentos recibidos
                     for (doc in snapshots.documents) {
-                        // Convierte el documento a la clase ChatMessage
                         val message = doc.toObject(ChatMessage::class.java)
                         if (message != null) {
                             messageList.add(message)
                         }
                     }
-
-                    // Notifica al adaptador que los datos han cambiado
                     chatAdapter.notifyDataSetChanged()
-
-                    // Desplazarse al último mensaje
                     if (messageList.isNotEmpty()) {
                         binding.recyclerViewChat.scrollToPosition(messageList.size - 1)
                     }

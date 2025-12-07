@@ -12,7 +12,6 @@ data class Producto(
     @SerializedName("rating") val calificacion: Calificacion
 )
 
-// Modelo para el objeto anidado "rating"
 data class Calificacion(
     @SerializedName("rate") val estrellas: Double,
     @SerializedName("count") val conteo: Int

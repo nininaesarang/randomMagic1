@@ -11,17 +11,13 @@ class ProductoAdapter (private val productos: List<Producto>) :
     RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
 
     inner class ProductoViewHolder(val binding: ItemProductosBinding) : RecyclerView.ViewHolder(binding.root)
-
-    // Crea un nuevo ViewHolder (invocado por el LayoutManager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
         val binding = ItemProductosBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProductoViewHolder(binding)
     }
 
-    // Retorna el tamaño total de la lista de datos
     override fun getItemCount(): Int = productos.size
 
-    // Asocia los datos de una posición con las vistas de un ViewHolder
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
         val producto = productos[position]
 

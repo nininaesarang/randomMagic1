@@ -47,8 +47,8 @@ class perfil : AppCompatActivity() {
 
         Glide.with(this)
             .load(usuario.foto.fotoGrande)
-            .circleCrop() // Para que la foto sea redonda, ¡un buen toque!
-            .error(R.drawable.ic_launcher_foreground) // Imagen de error
+            .circleCrop()
+            .error(R.drawable.ic_launcher_foreground)
             .into(binding.fotoperfil)
     }
 

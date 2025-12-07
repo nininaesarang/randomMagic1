@@ -15,12 +15,9 @@ class menu : AppCompatActivity() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // ¡IMPORTANTE! Inicializar la instancia de Firebase Auth.
         auth = FirebaseAuth.getInstance()
-
-        // Llamar a las funciones de configuración.
         configurarBotones()
-        mostrarBienvenida() // Para que el mensaje aparezca.
+        mostrarBienvenida()
     }
 
     private fun configurarBotones() {
@@ -30,7 +27,6 @@ class menu : AppCompatActivity() {
         }
 
         binding.perfil.setOnClickListener {
-            // Tu clase se llama 'perfil', no PerfilActivity
             val intent = Intent(this, perfil::class.java)
             startActivity(intent)
         }
@@ -52,10 +48,7 @@ class menu : AppCompatActivity() {
 
     private fun cerrarSesion() {
         auth.signOut()
-
-        // La corrección clave: apuntar a MainActivity.
         val intent = Intent(this, MainActivity::class.java)
-
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
