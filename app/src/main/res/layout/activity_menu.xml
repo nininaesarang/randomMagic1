@@ -36,7 +36,7 @@
 
         <!-- 1. Tarjeta para "Tienda de Productos" -->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardProductos"
+            android:id="@+id/productos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -58,7 +58,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/ic_store"
-                    app:tint="@color/black" />
+                    app:tint="#9951FF" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -75,7 +75,7 @@
 
         <!-- 2. Tarjeta para "Chat Grupal" -->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardChat"
+            android:id="@+id/chat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -97,7 +97,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/ic_chat"
-                    app:tint="@color/black" />
+                    app:tint="#9951FF" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -114,7 +114,7 @@
 
         <!-- 3. Tarjeta para "Ver Perfil" -->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardPerfil"
+            android:id="@+id/perfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -135,7 +135,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/ic_person"
-                    app:tint="@color/black" />
+                    app:tint="#9951FF" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -154,7 +154,7 @@
 
     <!-- Botón de Cerrar Sesión -->
     <Button
-        android:id="@+id/btnLogout"
+        android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"

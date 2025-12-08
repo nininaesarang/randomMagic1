@@ -39,6 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:padding="8dp"
         android:background="#F0F0F0"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,15 +49,17 @@
         <EditText
             android:id="@+id/etMessage"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
+            android:background="@drawable/escribir_msj"
             android:hint="Escribe tu mensaje..."
-            android:padding="12dp"
-            android:background="@drawable/rounded_edittext"
+            android:textColorHint="#fff"
             android:inputType="textCapSentences|textMultiLine"
             android:maxLines="4"
             android:minHeight="48dp"
-            android:layout_marginEnd="8dp" />
+            android:padding="12dp"
+            android:textColor="#FFFFFF"/>
 
         <ImageButton
             android:id="@+id/btnSend"
@@ -65,8 +68,7 @@
             android:background="@drawable/rounded_button"
             android:contentDescription="Enviar mensaje"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_send"
-            app:tint="@android:color/white" />
+            android:src="@drawable/ic_send" />
 
     </LinearLayout>
 
