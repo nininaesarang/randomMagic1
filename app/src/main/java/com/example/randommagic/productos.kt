@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.randommagic.databinding.ActivityProductosBinding
 import kotlinx.coroutines.launch
 
@@ -26,7 +27,7 @@ class productos : AppCompatActivity() {
     private fun configurarRecyclerView() {
         adapter = ProductoAdapter(listaDeProductos)
         binding.listaProductos.adapter = adapter
-        binding.listaProductos.layoutManager = GridLayoutManager(this, 2)
+        binding.listaProductos.layoutManager = LinearLayoutManager(this)
     }
 
     private fun obtenerProductosDeAPI() {

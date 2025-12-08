@@ -4,9 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_chat"
     tools:context=".ChatActivity">
 
-    <!-- 1. RecyclerView para la lista de mensajes (ocupa la mayor parte del espacio) -->
+    <TextView
+        android:id="@+id/tvHeaderTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#9951FF"
+        android:text="Chat grupal"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:padding="16dp"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewChat"
         android:layout_width="0dp"
@@ -19,7 +34,6 @@
         app:stackFromEnd="true"
         app:reverseLayout="false"/>
 
-    <!-- 2. Contenedor inferior para la entrada de texto y el botón de enviar -->
     <LinearLayout
         android:id="@+id/layoutInput"
         android:layout_width="0dp"
@@ -31,7 +45,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Campo de texto (EditText) para escribir el mensaje -->
         <EditText
             android:id="@+id/etMessage"
             android:layout_width="0dp"
@@ -45,7 +58,6 @@
             android:minHeight="48dp"
             android:layout_marginEnd="8dp" />
 
-        <!-- Botón de enviar (ImageButton para un icono) -->
         <ImageButton
             android:id="@+id/btnSend"
             android:layout_width="48dp"
