@@ -42,7 +42,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tvAppTitle"
         android:layout_marginTop="32dp" />
 
-    <!-- 1. Tarjeta Flotante para Agrupar los Campos de Login -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLoginContainer"
         android:layout_width="0dp"
@@ -63,7 +62,6 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- Campo de Correo -->
             <EditText
                 android:id="@+id/correo"
                 android:layout_width="match_parent"
@@ -73,7 +71,6 @@
                 android:padding="12dp"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Campo de Contraseña -->
             <EditText
                 android:id="@+id/contra"
                 android:layout_width="match_parent"
@@ -83,7 +80,6 @@
                 android:padding="12dp"
                 android:layout_marginBottom="32dp" />
 
-            <!-- Botón de Iniciar Sesión (Acción Primaria - Morado/Amarillo) -->
             <Button
                 android:id="@+id/login"
                 android:layout_width="match_parent"
@@ -110,7 +106,6 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="32dp" />
 
-    <!-- Botón de Registrarse (Acción Secundaria - Morado más claro) -->
     <Button
         android:id="@+id/registrar"
         android:layout_width="wrap_content"

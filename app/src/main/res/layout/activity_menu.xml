@@ -31,10 +31,9 @@
         app:layout_constraintTop_toBottomOf="@id/bienvenida"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
+        app:layout_constraintBottom_toTopOf="@+id/logout"
         app:layout_constraintVertical_bias="0.3">
 
-        <!-- 1. Tarjeta para "Tienda de Productos" -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/productos"
             android:layout_width="match_parent"
@@ -73,7 +72,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 2. Tarjeta para "Chat Grupal" -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/chat"
             android:layout_width="match_parent"
@@ -112,7 +110,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 3. Tarjeta para "Ver Perfil" -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/perfil"
             android:layout_width="match_parent"
@@ -152,7 +149,6 @@
 
     </LinearLayout>
 
-    <!-- Botón de Cerrar Sesión -->
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"

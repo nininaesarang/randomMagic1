@@ -10,7 +10,6 @@
     android:paddingEnd="8dp"
     android:paddingBottom="4dp">
 
-    <!-- Contenedor principal: usa layout_gravity="end" para alinear a la derecha -->
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,7 +24,6 @@
             android:orientation="vertical"
             android:padding="8dp">
 
-            <!-- Email del Remitente (Solo para referencia, lo ponemos pequeño y a la derecha) -->
             <TextView
                 android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
@@ -36,7 +34,6 @@
                 android:layout_gravity="end"
                 tools:text="yo@miempresa.com" />
 
-            <!-- Texto del Mensaje -->
             <TextView
                 android:id="@+id/tvMessageSent"
                 android:layout_width="wrap_content"
@@ -46,7 +43,6 @@
                 android:textSize="16sp"
                 tools:text="Hola a todos, este es mi mensaje." />
 
-            <!-- Hora del Mensaje -->
             <TextView
                 android:id="@+id/tvTimestampSent"
                 android:layout_width="wrap_content"

@@ -28,7 +28,7 @@ class ChatActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.apply {
-            title = "Chat Grupal" // Opcional: Pone un título a la pantalla.
+            title = "Chat Grupal"
             setDisplayHomeAsUpEnabled(true)
         }
 
@@ -59,7 +59,7 @@ class ChatActivity : AppCompatActivity() {
 
     private fun sendMessage() {
         val messageText = binding.etMessage.text.toString().trim()
-        val userEmail = auth.currentUser?.email // Email del remitente
+        val userEmail = auth.currentUser?.email
         if (messageText.isEmpty() || userEmail == null) {
             Toast.makeText(this, "No puedes enviar un mensaje vacío.", Toast.LENGTH_SHORT).show()
             return

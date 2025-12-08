@@ -53,7 +53,6 @@ class ChatAdapter(private val messages: List<ChatMessage>) : RecyclerView.Adapte
                 holder.binding.tvTimestampSent.text = formattedTime
             }
             is ReceivedMessageViewHolder -> {
-                // Asigna el texto del mensaje y el email del remitente.
                 holder.binding.tvMessageText.text = message.text
                 holder.binding.tvSender.text = message.userEmail
                 holder.binding.tvTimestamp.text = formattedTime

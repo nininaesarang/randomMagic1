@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 1. Usamos CardView como el contenedor principal -->
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,12 +10,10 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="6dp">
 
-    <!-- 2. Dentro del CardView, usamos un ConstraintLayout para organizar todo -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Imagen del Producto -->
         <ImageView
             android:id="@+id/fotoproducto"
             android:layout_width="0dp"
@@ -27,7 +24,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" /> <!-- Imagen de muestra -->
 
-        <!-- Nombre del Producto (Más grande y prominente) -->
         <TextView
             android:id="@+id/nombreproducto"
             android:layout_width="0dp"
@@ -42,7 +38,6 @@
             app:layout_constraintEnd_toStartOf="@+id/precio"
             tools:text="Nombre del Producto" />
 
-        <!-- Precio (Alineado a la derecha, con un color llamativo) -->
         <TextView
             android:id="@+id/precio"
             android:layout_width="wrap_content"
@@ -55,7 +50,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="$99.99" />
 
-        <!-- Descripción (Con un texto más sutil) -->
         <TextView
             android:id="@+id/descripcion"
             android:layout_width="0dp"
@@ -70,7 +64,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Aquí va una descripción detallada del producto, que puede ser un poco larga y ocupar varias líneas para explicar las características principales." />
 
-        <!-- Categoría (Usando un "Chip" de Material Design para un look moderno) -->
         <com.google.android.material.chip.Chip
             android:id="@+id/categoria"
             android:textColor="@color/white"
@@ -86,7 +79,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="Categoría" />
 
-        <!-- ID del producto (Pequeño y en la esquina, si es necesario mostrarlo) -->
         <TextView
             android:id="@+id/idproducto"
             android:layout_width="wrap_content"
