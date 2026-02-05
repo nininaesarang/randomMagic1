@@ -1,6 +1,6 @@
 # ✨ randomMagic - App Android de Mensajería y Catálogo
 
-**randomMagic** es una aplicación móvil nativa desarrollada como proyecto final de la carrera de Ingeniería en Sistemas Computacionales. Combina un sistema de chat en tiempo real con un catálogo visual de productos, integrando servicios en la nube con una interfaz de usuario personalizada.
+**RandomMagic** es una aplicación móvil nativa desarrollada como proyecto final de la materia de Bases de Datos para Dispositivos Móviles en mi 7mo semestre de mi carrera. Combina un sistema de chat en tiempo real con un catálogo visual de productos, integrando servicios en la nube con una interfaz de usuario personalizada.
 
 ## 👥 Sinergia del Equipo
 Este proyecto se estructuró separando el diseño visual de la ingeniería de software:
