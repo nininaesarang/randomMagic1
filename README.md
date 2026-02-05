@@ -26,3 +26,8 @@ Como desarrolladora líder del proyecto, fui responsable de materializar el dise
     * Realicé pruebas de envío/recepción de mensajes y validación de sesiones de usuario.
 
 ## 📸 Galería
+![Pantalla de Login](img/1000316395.jpg)
+![Pantalla de Bienvenida](img/1000316396.jpg)
+![Pantalla de Productos](img/1000316397.jpg)
+![Pantalla de Chat](img/1000316400.jpg)
+![Pantalla de Perfil](img/1000316402.jpg)
